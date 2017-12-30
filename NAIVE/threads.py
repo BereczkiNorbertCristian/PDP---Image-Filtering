@@ -18,6 +18,8 @@ def copyRow(oi, ni, IDX):
         ni[i][IDX] = oi[i][IDX]
 
 # USING MEDIAN FILTERING
+
+
 def compute_median_n(oi, i, j):
     dist = [0] * 8
     cnt = 0
@@ -32,10 +34,23 @@ def compute_median_n(oi, i, j):
     return (dist[3] + dist[4]) // 2
 
 
+def compute_linear_convolution(oi, i, j):
+    sum_over = 0
+    sum_over += oi[i][j + 1]
+    sum_over += oi[i][j - 1]
+    sum_over += oi[i + 1][j]
+    sum_over += oi[i - 1][j]
+    return sum_over // 4
+
+
+def compute_convolution(oi, i, j):
+    return compute_linear_convolution(oi, i, j)
+
+
 def doWork(oi, ni, beg_row, end_row, row_length):
     for i in range(beg_row, end_row):
         for j in range(1, row_length - 1):
-            ni[i][j] = compute_median_n(oi, i, j)
+            ni[i][j] = compute_convolution(oi, i, j)
 
 # READ IMAGE AND METADATA
 old_image = imageio.imread(FILENAME)
