@@ -1,2 +1,2 @@
-# PDP---Image-Filtering
-Project for PDP
+# Parallel Image Filtering
+Used: CUDA and MPI
